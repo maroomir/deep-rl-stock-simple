@@ -23,7 +23,8 @@ class Stock(Env):
         self.episode_length = 30
 
         # Train 데이터와 Test 데이터를 분리
-        if test == True:
+        self.test = test
+        if self.test == True:
             self.dataset_path = os.path.join(".","datasets","test",code+".csv")
         else:
             self.dataset_path = os.path.join(".","datasets","train",code+".csv")
@@ -138,7 +139,13 @@ class Stock(Env):
         dataset = self.dataset
 
         row_count = len(dataset.index)
-        start_index = random.randint(0, row_count - self.episode_length - self.window_size - 1)
+        # Test인 경우 앞에서부터 차례대로
+        if self.test == True:
+            start_index = self.episode_count
+            if start_index >= row_count - self.episode_length - self.window_size - 1:
+                start_index = row_count - self.episode_length - self.window_size - 1
+        else:
+            start_index = random.randint(0, row_count - self.episode_length - self.window_size - 1)
 
         data = dataset.iloc[start_index:(start_index + self.episode_length + self.window_size + 1)]
 
