@@ -1,10 +1,10 @@
 import gym
 import numpy as np
 
-from stable_baselines.ddpg.policies import MlpPolicy
-from stable_baselines.common.noise import NormalActionNoise, OrnsteinUhlenbeckActionNoise, AdaptiveParamNoiseSpec
-from stable_baselines import DDPG
-from stable_baselines.bench import Monitor
+from stable_baselines3.ddpg.policies import MlpPolicy
+from stable_baselines3.common.noise import NormalActionNoise, OrnsteinUhlenbeckActionNoise
+from stable_baselines3 import DDPG
+from stable_baselines3.common.monitor import Monitor
 
 from env import Stock
 
@@ -20,5 +20,5 @@ n_actions = env.action_space.shape[-1]
 param_noise = None
 action_noise = OrnsteinUhlenbeckActionNoise(mean=np.zeros(n_actions), sigma=float(0.5) * np.ones(n_actions))
 
-model = DDPG(MlpPolicy, env, verbose=1, param_noise=param_noise, action_noise=action_noise)
+model = DDPG(MlpPolicy, env, verbose=1, action_noise=action_noise)
 model.learn(total_timesteps=20000, log_interval=100, callback=bestRewardCallback)

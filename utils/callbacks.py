@@ -1,7 +1,6 @@
 import numpy as np
 import os
-from stable_baselines.results_plotter import load_results, ts2xy
-import tensorflow as tf
+from stable_baselines3.common.results_plotter import load_results, ts2xy
 
 best_mean_reward, n_steps = -np.inf, 0
 

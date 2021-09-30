@@ -3,10 +3,10 @@ import numpy as np
 from glob import glob
 import re
 
-from stable_baselines.ddpg.policies import MlpPolicy
-from stable_baselines.common.noise import NormalActionNoise, OrnsteinUhlenbeckActionNoise, AdaptiveParamNoiseSpec
-from stable_baselines import DDPG
-from stable_baselines.bench import Monitor
+from stable_baselines3.ddpg.policies import MlpPolicy
+from stable_baselines3.common.noise import NormalActionNoise, OrnsteinUhlenbeckActionNoise
+from stable_baselines3 import DDPG
+from stable_baselines3.common.monitor import Monitor
 
 from env import Stock
 
